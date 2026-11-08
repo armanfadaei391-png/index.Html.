@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#080808" />
+    <meta name="color-scheme" content="dark" />
+    <title>برای بانو نیکا</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: max(20px, env(safe-area-inset-top)) 20px
+          max(20px, env(safe-area-inset-bottom));
+        background: radial-gradient(circle, #35101e, #080808 70%);
+        color: white;
+        font-family: Tahoma, "Segoe UI", Arial, sans-serif;
+        text-align: center;
+        overflow-x: hidden;
+        overscroll-behavior: none;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 390px;
+        padding: clamp(24px, 6vw, 35px) clamp(18px, 5vw, 22px);
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 70, 110, 0.45);
+        border-radius: 24px;
+        box-shadow: 0 0 35px rgba(255, 0, 65, 0.15);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+      }
+
+      @supports not (
+        (backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))
+      ) {
+        .card {
+          background: rgba(30, 10, 18, 0.85);
+        }
+      }
+
+      h1 {
+        color: #ff557b;
+        text-shadow: 0 0 18px #ff1744;
+        font-size: clamp(22px, 6.5vw, 27px);
+        line-height: 1.4;
+        margin: 0 0 12px;
+      }
+
+      p {
+        line-height: 1.9;
+        color: #f4dce3;
+        font-size: clamp(14px, 4vw, 16px);
+        margin: 10px 0;
+      }
+
+      button {
+        background: #ff1744;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 14px 22px;
+        margin-top: 15px;
+        font-size: 16px;
+        font-family: inherit;
+        cursor: pointer;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+        min-height: 48px;
+        -webkit-appearance: none;
+        appearance: none;
+        touch-action: manipulation;
+      }
+
+      @media (hover: hover) {
+        button:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 0 22px #ff1744;
+        }
+      }
+
+      button:active {
+        transform: scale(0.97);
+        box-shadow: 0 0 18px #ff1744;
+      }
+
+      button:focus-visible {
+        outline: 2px solid #ff7895;
+        outline-offset: 3px;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      #letter {
+        margin-top: 25px;
+        padding: 18px;
+        background: rgba(255, 23, 68, 0.09);
+        border-radius: 15px;
+        animation: reveal 0.7s ease;
+      }
+
+      #letter h2 {
+        color: #ff7895;
+        font-size: clamp(18px, 5vw, 22px);
+        margin: 0 0 10px;
+      }
+
+      @keyframes reveal {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hearts {
+        position: fixed;
+        top: max(8%, env(safe-area-inset-top));
+        left: 8%;
+        color: #ff1744;
+        font-size: clamp(36px, 10vw, 48px);
+        opacity: 0.7;
+        animation: float 3s ease-in-out infinite;
+        pointer-events: none;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotate(-10deg);
+        }
+        50% {
+          transform: translateY(-25px) rotate(10deg);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <span class="hearts" aria-hidden="true">❤️</span>
+
+    <main class="card">
+      <h1>سلام بانو نیکا عاشقتم عاشقتم</h1>
+
+      <h3>این کادو رو با عشق تقدیمت میکنم</h3>
+
+      <p>یه چیزی برات آماده کردم...</p>
+
+      <button
+        id="openLetter"
+        type="button"
+        aria-controls="letter"
+        aria-expanded="false"
+      >
+        نامه‌تو باز کن ❤️
+      </button>
+
+      <div id="letter" class="hidden" aria-live="polite">
+        <h2>برای نیکای قشنگم 🌹</h2>
+        <p>
+          شاید نتونم حسمو با کلمه‌ها بگم، ولی بدون تو تمام زندگی منی و از ته دلم
+          می‌گم که عاشقتم.
+        </p>
+        <p>با ذوق و عشق، از طرف من ❤️</p>
+      </div>
+    </main>
+
+    <script>
+      (function () {
+        function init() {
+          var button = document.getElementById("openLetter");
+          var letter = document.getElementById("letter");
+          if (!button || !letter) return;
+
+          button.addEventListener("click", function () {
+            var isHidden = letter.classList.toggle("hidden");
+            button.setAttribute("aria-expanded", isHidden ? "false" : "true");
+
+            if (!isHidden) {
+              letter.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            }
+          });
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", init);
+        } else {
+          init();
+        }
+      })();
+    </script>
+  </body>
+</html>
